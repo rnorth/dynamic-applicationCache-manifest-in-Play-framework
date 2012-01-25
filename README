@@ -1,0 +1,7 @@
+This should have been a gist, were it not for the fact that it contains a fair few files. This is a really quick, dirty, lazy demo of building an applicationCache manifest file dynamically, based on something in a cookie.
+
+Run this in play framework ('play run') and look at http://localhost:9000/?username=foo 
+
+It's probably breaking some rules by the manifest changing on every request, but the idea is that you'd probably include a more sensible 'last modified' type comment in the manifest file.
+
+
