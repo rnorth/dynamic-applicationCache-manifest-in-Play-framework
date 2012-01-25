@@ -1,0 +1,9 @@
+CACHE MANIFEST
+# version ${new Date()}
+# generated for user ${username}
+
+# this resource won't exist but should prove the concept
+${username}.png
+
+NETWORK:
+*

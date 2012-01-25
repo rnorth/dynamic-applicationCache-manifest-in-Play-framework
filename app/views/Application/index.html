@@ -1,0 +1,30 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+Visit this page at:
+ <a href="http://localhost:9000/?username=foo">http://localhost:9000/?username=foo</a> or
+ <a href="http://localhost:9000/?username=bar">http://localhost:9000/?username=bar</a>
+
+to do an incredibly simple, dirty set of a value in a session cookie.<br />
+Via the server log and browser debug console, you should see that:
+<ul>
+	<li>The browser requests appcache.manifest on each refresh of this page - 
+	    shown in the server logs but interestingly not the chrome network
+	    debug tab</li>
+	<li>The returned appcache.manifest file contains a changed timestamp, one comment 
+	containing the 'username' value encoded in the session cookie, and one cached resource
+	reference to a fictitious resource based on the 'username' value</li>
+	<li>Because the commented timestamp has changed, the file is reprocessed by the browser</li>
+	<li>If this fictitious resource actually existed, the browser would download it
+	 and cache it, but I was too lazy to implement that. Instead you'll see
+	 a browser error saying that this resource (specifically named) returned a 404 error.</li> 
+</ul>
+e.g. for http://localhost:9000/?username=bob:
+<pre>
+Adding master entry to Application Cache with manifest http://localhost:9000/appcache.manifest
+Application Cache Downloading event
+Application Cache Progress event (0 of 2) http://localhost:9000/bob.png
+Application Cache Error event: Resource fetch failed (404) http://localhost:9000/bob.png
+</pre>
+
+Username session property has been set to: <b>${username}</b>
